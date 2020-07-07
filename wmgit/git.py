@@ -3,16 +3,20 @@ class gitdownload:
     def __init__(self, url, project, app, gitpath, worktree):
         self.url = url
         self.app = app
-        self.worktree = worktree
-        self.gitpath = gitpath
         self.project = project
+        if self.app == 'tbonline':
+            self.worktree = worktree
+            self.gitpath = gitpath
+        else:
+            self.worktree = '{}/{}'.format(worktree, project)
+            self.gitpath = '{}/{}'.format(gitpath, project)
     def clone(self):
         try:
             #判斷目錄不存在
-            if not os.path.exists('{}/{}'.format(self.gitpath, self.project)):
+            if not os.path.exists('{}'.format(self.gitpath)):
                 #makedirs = mkdir -p
-                os.makedirs('{}/{}'.format(self.gitpath, self.project))
-            os.chdir('{}/{}'.format(self.gitpath, self.project))
+                os.makedirs('{}'.format(self.gitpath))
+            os.chdir('{}'.format(self.gitpath))
             if not os.path.exists(self.app):
                 os.system('/bin/git clone {} {}'.format(self.url, self.app))
             else:
@@ -22,19 +26,19 @@ class gitdownload:
             exit()
     def changepath(self):
         #判斷目錄不存在
-        if not os.path.exists('{}/{}/{}'.format(self.worktree, self.project, self.app)):
-            os.makedirs('{}/{}/{}'.format(self.worktree, self.project, self.app))
+        if not os.path.exists('{}/{}'.format(self.worktree, self.app)):
+            os.makedirs('{}/{}'.format(self.worktree, self.app))
         #判斷目錄是否為空
-        if os.listdir('{}/{}/{}/.git'.format(self.gitpath, self.project, self.app)):
-            try:
-                os.chdir('{}/{}'.format(self.gitpath, self.project))
-                os.system('mv {app}/* {worktree}/{pro}/{app}'.format(pro=self.project, app=self.app, worktree=self.worktree))
+        try:
+            if os.listdir('{}/{}/.git'.format(self.gitpath, self.app)):
+                os.chdir('{}'.format(self.gitpath))
+                os.system('mv {app}/* {worktree}/{app}'.format(app=self.app, worktree=self.worktree))
                 os.system('mv {i}/.git/* {i}'.format(i=self.app))
-                os.system('git --git-dir={app} config core.worktree {worktree}/{pro}/{app}'.format(pro=self.project, app=self.app, worktree=self.worktree))
-            except OSError as e:
+                os.system('git --git-dir={app} config core.worktree {worktree}/{app}'.format(app=self.app, worktree=self.worktree))
+            else:
+                print('worktree already')
+        except OSError as e:
                 print(e)
-        else:
-            print('worktree already')
 class WM:
     #project = list()
     #app = list()
@@ -62,7 +66,7 @@ class rsync_conf:
             os.makedirs('{}'.format(self.conf_path))
     def folder(self):
         with open('{}/{}-folder.txt'.format(self.conf_path, self.project), 'w') as f:
-            f.write('tbonline\n')
+            #f.write('tbonline\n')
             for i in self.app:
                 f.write('%s\n' % i)
     def hosts(self):
@@ -73,9 +77,9 @@ class rsync_conf:
 if __name__ == '__main__':
     user = 'a168-rp'
     passwd = 'XapfHLP4'
-    gitapp = 'a168'
+    gitapp = 'tbonline'
     gitpro = 'w3'
-    url = 'http://{u}:{p}@igofun.net:30000/{r}/{r}-{a}.git'.format(u=user, p=passwd, r=gitpro, a=gitapp)
+    url = 'http://{u}:{p}@igofun.net:30000/a168/{a}.git'.format(u=user, p=passwd, r=gitpro, a=gitapp)
     worktree = '/home/work/test'
     gitpath = '/home/work/test2'
     git = gitdownload(url=url, project=gitpro, app=gitapp, gitpath=gitpath, worktree=worktree)
