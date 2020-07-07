@@ -12,7 +12,10 @@ if __name__ == "__main__":
         app = git.WM().apps()
         #url = list()
         for j in app:
-            url = ('http://{u}:{p}@{d}/{r}/{r}-{a}.git'.format(u=user, p=passwd, r=pro, a=j, d=domain))
+            if j == 'tbonline':
+                url = ('http://{u}:{p}@{d}/a168/{a}.git'.format(u=user, p=passwd, a=j, d=domain))
+            else:
+                url = ('http://{u}:{p}@{d}/{r}/{r}-{a}.git'.format(u=user, p=passwd, r=pro, a=j, d=domain))
             gitdownload = git.gitdownload(url=url, project=pro, app=j, gitpath=gitpath, worktree=worktree)
             gitdownload.clone()
             gitdownload.changepath()
