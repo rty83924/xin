@@ -1,12 +1,13 @@
 import git
+from config import config
 
 if __name__ == "__main__":
-    user = 'a168-rp'
-    passwd = 'XapfHLP4'
-    domain = 'igofun.net:30000'
-    worktree = '/home/work/test'
-    gitpath = '/home/work/test2'
-    conf_path = '/home/work'
+    user = config.user
+    passwd = config.passwd
+    domain = config.domain
+    worktree = config.worktree
+    gitpath = config.gitpath
+    conf_path = config.conf_path
     while True:
         pro = '%s' % git.WM().pro()
         app = git.WM().apps()
