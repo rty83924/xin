@@ -2,6 +2,7 @@ import git
 from config import config
 
 if __name__ == "__main__":
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     user = config.user
     passwd = config.passwd
     domain = config.domain
