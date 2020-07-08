@@ -2,6 +2,7 @@
 * wmgit
 ```py
 工作目錄下新增config.py
+class config:
     user = '${user}'
     passwd = '${password}'
     domain = '${git_domain}'
