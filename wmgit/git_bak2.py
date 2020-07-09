@@ -1,11 +1,9 @@
 import os
 class gitdownload:
-    def __init__(self, url, project, app, gitpath, worktree, office=True):
-        self.office = office
+    def __init__(self, url, project, app, gitpath, worktree):
         self.url = url
         self.app = app
         self.project = project
-        self.branch = ''
         if self.app == 'tbonline':
             self.worktree = worktree
             self.gitpath = gitpath
@@ -26,19 +24,6 @@ class gitdownload:
         except Exception:
             print('clone false')
             exit()
-    def checkout(self):
-        if self.app == 'tbonline':
-            pass
-        else:
-            if self.office == True:
-                self.branch = '{}-{}'.format(self.project, self.app)
-            elif self.office == False:
-                self.branch = '{}-{}-test'.format(self.project, self.app)
-            os.chdir('{}/{}'.format(self.gitpath, self.app))
-            try:
-                os.system('git checkout {}'.format(self.branch))
-            except OSError as e:
-                print(e)
     def changepath(self):
         #判斷目錄不存在
         if not os.path.exists('{}/{}'.format(self.worktree, self.app)):
@@ -91,16 +76,15 @@ class rsync_conf:
             f.write('%s' % IP)
 
 if __name__ == '__main__':
-    user = 'galarp'
-    passwd = 'gala8899'
-    gitapp = 'ag'
+    user = 'a168-rp'
+    passwd = 'XapfHLP4'
+    gitapp = 'tbonline'
     gitpro = 'w3'
-    url = 'http://{u}:{p}@igofun.net:30000/gala/a168-w1.git'.format(u=user, p=passwd, r=gitpro, a=gitapp)
+    url = 'http://{u}:{p}@igofun.net:30000/a168/{a}.git'.format(u=user, p=passwd, r=gitpro, a=gitapp)
     worktree = '/home/work/test'
     gitpath = '/home/work/test2'
     git = gitdownload(url=url, project=gitpro, app=gitapp, gitpath=gitpath, worktree=worktree)
     git.clone()
-    git.checkout()
     git.changepath()
 
     
