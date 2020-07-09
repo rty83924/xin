@@ -84,9 +84,12 @@ class rsync_conf:
         with open('{}/{}-folder.txt'.format(self.conf_path, self.project), 'w') as f:
             #f.write('tbonline\n')
             for i in self.app:
-                f.write('%s\n' % i)
+                if i == 'conf':
+                    pass
+                else:
+                    f.write('%s\n' % i)
     def hosts(self):
-        IP = str(input('Rsync hosts IP? :'))
+        IP = str(input('Rsync 遠端 IP? :'))
         with open('{}/{}-host.txt'.format(self.conf_path, self.project), 'w') as f:
             f.write('%s' % IP)
 
