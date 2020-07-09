@@ -46,14 +46,15 @@ class WM:
         self.project = str()
         self.app = list()
     def pro(self):
-        a = str(input('project #w1/w3 \nEnter: '))
+        a = str(input('專案名稱 如 #w1/w3 \nEnter: '))
         self.project = '%s' % a
         return self.project
     def apps(self):
+        print('-----第一個APP請輸入tbonline!!!----')
         while True:
-            a = str(input('app name #api/a168 \nEnter: '))
+            a = str(input('請輸入app 名稱如 #api/a168 \nEnter: '))
             self.app.append(a)
-            b = str(input('continue #yes/no \nEnter: '))
+            b = str(input('是否繼續 #yes/no \nEnter: '))
             if b == 'no':
                 break
         return self.app

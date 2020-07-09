@@ -27,11 +27,11 @@ if __name__ == "__main__":
         rsync_conf.folder()
         rsync_conf.hosts()
         while True:
-            b = str(input('continue #yes/no \nEnter: '))
+            b = str(input('其他專案? #yes/no \nEnter: '))
             if b == 'yes':
                 break
             elif b == 'no':
                 exit()
             else:
-                print("Enter either yes/no")
+                print("請輸入 yes/no")
 
