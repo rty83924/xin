@@ -67,7 +67,7 @@ class WM:
     def apps(self):
         print('-----第一個APP請輸入tbonline!!!----')
         while True:
-            a = str(input('請輸入app 名稱如 #api/a168 \nEnter: '))
+            a = str(input('請輸入app 名稱如 #api/ag \nEnter: '))
             self.app.append(a)
             b = str(input('是否繼續 #yes/no \nEnter: '))
             if b == 'no':
