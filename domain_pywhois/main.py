@@ -101,12 +101,12 @@ class domain_search:
             'Content-type': 'application/json'
         }
         r = requests.post(token, json = {'text': message}, headers = my_header)
-        return r.text
+        return r.text 
 
 
 if __name__ == '__main__':
     #取得dns webit id  
-    token = 'https://hooks.slack.com/services/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'  
+    token = 'https://hooks.slack.com/services/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'  
     sql_id = []                            #製作列表
     domain = []
     sql = r"SELECT  `id` FROM `webit-v2`.`cloud` LIMIT 1000;"
